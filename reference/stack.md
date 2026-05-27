@@ -73,14 +73,15 @@ A stack is **three independent choices**: how you **build** (framework), where t
 
 Short-circuit the decision with these:
 
-1. Stays content-focused → **Astro**
-2. Will grow into an app → **Next.js**
-3. Non-dev edits content daily → **Headless CMS** or **Webflow**
-4. Devs write the content → **MDX in repo**
-5. Bandwidth unpredictable or potentially viral → **Cloudflare Pages**
-6. Uses Next.js ISR / edge middleware → **Vercel**
-7. Design-led client, no dev capacity → **Webflow**
-8. Many similar sites for different clients → **Code + shared template**
+1. Client already uses a stack in other projects → **match it** (easier handoff, shared conventions, team familiarity often outweighs picking the "ideal" stack)
+2. Stays content-focused → **Astro**
+3. Will grow into an app → **Next.js**
+4. Non-dev edits content daily → **Headless CMS** or **Webflow**
+5. Devs write the content → **MDX in repo**
+6. Bandwidth unpredictable or potentially viral → **Cloudflare Pages**
+7. Uses Next.js ISR / edge middleware → **Vercel**
+8. Design-led client, no dev capacity → **Webflow**
+9. Many similar sites for different clients → **Code + shared template**
 
 ---
 
