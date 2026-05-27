@@ -18,7 +18,7 @@
 
 **Dev:**
 
-1. Copy `<GUIDELINES_PATH>/templates/AGENTS.md` into the new project as `AGENTS.md`.
+1. WebFetch the AGENTS template (`templates/AGENTS.md` in the guidelines repo — use the URL pattern from the kickoff prompt) and save it to the new project's root as `AGENTS.md`.
 2. Adapt it: stack versions, project structure, design tokens, conventions. Strip sections that don't apply.
 3. If the project has substantial extra rules, create `guidelines.md` at root and reference it from `AGENTS.md` via `@guidelines.md`.
 4. Create `CLAUDE.md` at root with a single line: `@AGENTS.md`.
@@ -42,7 +42,7 @@ In the new project's root:
 
 ## Compile into the project
 
-This step **is** the main compile step. After it, Claude should be able to work on the project without ever reading `<GUIDELINES_PATH>` again.
+This step **is** the main compile step. After it, Claude should be able to work on the project without fetching from the guidelines repo again.
 
 Pull from the guidelines into the new project as you go:
 

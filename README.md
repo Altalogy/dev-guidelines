@@ -4,7 +4,7 @@ Internal wiki for tech stack choices, project setup, AI workflows, and conventio
 
 ## How this works
 
-This repo is a long-term **wiki**. When you start a new project, Claude Code reads the playbook here and **compiles what's needed into the new project** (`AGENTS.md`, optionally a linked `guidelines.md`). After setup, the new project is self-contained — you don't need to keep looking back. Return here for:
+This repo is a long-term **wiki**. When you start a new project, Claude Code reads the playbook directly from GitHub (no clone required) and **compiles what's needed into the new project** (`AGENTS.md`, optionally a linked `guidelines.md`). After setup, the new project is self-contained — you don't need to keep looking back. Return here for:
 
 - generic, cross-project aid (e.g. "how do I share the codebase with a designer?")
 - updating the guidelines when you learn something new on a project
@@ -13,7 +13,7 @@ Treat the contents as a **starting point, not a rulebook**. AI tooling moves fas
 
 ## Starting a new project
 
-→ **[START-HERE.md](START-HERE.md)** — the kickoff prompt to paste into Claude Code.
+→ **[START-HERE.md](START-HERE.md)** — paste one prompt into Claude Code. Zero setup.
 
 ## Playbook (what Claude walks through)
 
@@ -36,3 +36,5 @@ Treat the contents as a **starting point, not a rulebook**. AI tooling moves fas
 ## Contributing back
 
 Learn something during a project that future projects would benefit from? Add it here. Keep entries compact — link out for depth rather than inlining.
+
+> **Note:** this repo must be **public on GitHub** for the one-paste setup to work. See [START-HERE.md](START-HERE.md#for-maintainers).
