@@ -36,6 +36,7 @@ Every step uses the same shape so Claude can drive it predictably:
 
 - One step at a time. Confirm before moving on.
 - In step 1, lead with the wizard. Skip questions whose answer is determined by an earlier one.
+- **`AskUserQuestion` is capped at 4 options** (+ an auto-added "Other"). If a question logically has more, split it into a category + subtype pair — see Q1 → Q1a / Q1b in step 1 for the pattern.
 - For stub steps, state what they will cover and ask the user whether to skip, improvise from today's best practices, or stop here.
 - Don't blindly apply: if something looks outdated for the current date or chosen stack, flag it.
 - Open items live in [../todo.md](../todo.md). When you stub something, add it there so it doesn't get lost.

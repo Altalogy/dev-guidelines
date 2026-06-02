@@ -11,31 +11,44 @@ The old flow asked many open questions up front. Users almost always know what t
 3. Offer a **Default** option in every multi-choice question. The user should be able to take the defaults end-to-end and get a sensible scaffold.
 4. Offer a **Skip — decide later** option where the decision can wait without blocking scaffolding (flag it in `AGENTS.md` and the project's todo).
 
+## UI constraint
+
+Claude Code's `AskUserQuestion` tool **caps options at 4** (plus an auto-added "Other"). Every question below stays within that cap. When a logical question would have more than 4 options, split it into a category + subtype pair (see Q1 → Q1a / Q1b).
+
 ---
 
-## Question 1 — Project type
+## Question 1 — Project category
 
 > "What kind of project are we starting?"
 
-1. **Website — Next.js** *(with or without CMS — asked next)*
-2. **Website — Astro**
-3. **Website — Webflow**
-4. **Prototype — Next.js**
-5. **Prototype — plain HTML/CSS/JS** *(handoff path: Webflow)*
-6. **Tool** *(e.g. asset generation, internal utility)*
-7. **Help me decide**
+1. **Website**
+2. **Prototype**
+3. **Tool** *(e.g. asset generation, internal utility)*
+4. **Help me decide**
 
 Routing:
 
 | Answer | Next |
 | --- | --- |
-| 1 (Next.js website) | Q2 (CMS) |
-| 2 (Astro) | CMS auto = **inbuilt MDX** → skip to Q3 |
-| 3 (Webflow) | CMS auto = **Webflow CMS** → skip to Q3 |
-| 4 (Prototype — Next.js) | No CMS → skip to Q3 |
-| 5 (Prototype — HTML/CSS/JS) | No CMS → skip to Q3 |
-| 6 (Tool) | No CMS → skip to Q3 |
-| 7 (Help me decide) | Enter "Help me decide" branch (below), then loop back to Q1 |
+| 1 (Website) | Q1a (framework) |
+| 2 (Prototype) | Q1b (framework) |
+| 3 (Tool) | Skip to Q3 (no CMS, no framework choice yet) |
+| 4 (Help me decide) | "Help me decide" branch (below) → loop back to Q1 |
+
+### Question 1a — Website framework *(only if Q1 = 1)*
+
+> "Which framework?"
+
+1. **Next.js** → continue to Q2 (CMS)
+2. **Astro** → CMS auto = **inbuilt MDX** → skip to Q3
+3. **Webflow** → CMS auto = **Webflow CMS** → skip to Q3
+
+### Question 1b — Prototype framework *(only if Q1 = 2)*
+
+> "Which prototype shape?"
+
+1. **Next.js** → no CMS, skip to Q3
+2. **Plain HTML/CSS/JS** *(handoff path: Webflow)* → no CMS, skip to Q3
 
 ### "Help me decide" branch
 
@@ -52,16 +65,22 @@ Map answers to one of options 1-6 (rules to formalize — see [../todo.md](../to
 
 ## Question 2 — CMS *(conditional)*
 
-Triggered **only** by Q1 = 1 (Next.js website). Auto-set otherwise.
+Triggered **only** by Q1a = 1 (Next.js website). Auto-set otherwise.
 
 > "What's the content source?"
 
-- **Strapi** *(default)* — self-hosted, predictable bill, plugins cover most cases
-- **MDX in repo** — devs write content, Git-versioned
-- **Sanity** — editorial team, real-time, complex schemas
-- **Storyblok** — marketing team, visual editor
-- **Payload** — TypeScript-native, self-hostable
-- **Skip — decide later** — scaffold without a CMS; flag in `AGENTS.md` and the project todo
+1. **Strapi** *(default)* — self-hosted, predictable bill, plugins cover most cases
+2. **MDX in repo** — devs write content, Git-versioned
+3. **Other hosted CMS** — drill in (Q2a)
+4. **Skip — decide later** — scaffold without a CMS; flag in `AGENTS.md` and the project todo
+
+### Question 2a — Hosted CMS *(only if Q2 = 3)*
+
+> "Which hosted CMS?"
+
+1. **Sanity** — editorial team, real-time, complex schemas
+2. **Storyblok** — marketing team, visual editor
+3. **Payload** — TypeScript-native, self-hostable
 
 See [reference/cms.md](../reference/cms.md) for the comparison and heuristics.
 
@@ -98,22 +117,23 @@ Naming: kebab-case for the repo / package name (`acme-marketing`). Display name 
 
 > "Where will this deploy?"
 
-- **Vercel** *(default for Next.js)*
-- **Cloudflare Pages** *(default for Astro / static)*
-- **AWS (CloudFront + S3)** — alternative when client requires AWS
-- **Webflow Hosting** *(auto when Q1 = 3)*
-- **Skip — decide later**
+Skipped entirely when Q1a = Webflow (auto-set to Webflow Hosting) or Q1 = Tool + CLI (ships via npm, not hosting).
 
-Defaults applied based on Q1:
+1. **Vercel** *(default for Next.js)*
+2. **Cloudflare Pages** *(default for Astro / static)*
+3. **AWS (CloudFront + S3)** — alternative when client requires AWS
+4. **Skip — decide later**
 
-| Q1 | Default hosting |
+Defaults applied based on project type:
+
+| Project type | Default hosting |
 | --- | --- |
-| 1, 4 (Next.js) | Vercel |
-| 2 (Astro) | Cloudflare Pages |
-| 3 (Webflow) | Webflow Hosting (auto) |
-| 5 (HTML/CSS/JS) | Cloudflare Pages |
-| 6 (Tool — web) | Vercel |
-| 6 (Tool — CLI) | npm (not hosting) |
+| Website / Prototype — Next.js | Vercel |
+| Website — Astro | Cloudflare Pages |
+| Website — Webflow | Webflow Hosting (auto, skip Q5) |
+| Prototype — HTML/CSS/JS | Cloudflare Pages |
+| Tool — web | Vercel |
+| Tool — CLI | npm (auto, skip Q5) |
 
 See [reference/deployment.md](../reference/deployment.md).
 
