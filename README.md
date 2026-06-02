@@ -1,6 +1,16 @@
 # Dev Guidelines
 
-Internal wiki for tech stack choices, project setup, AI workflows, and conventions.
+Our guidelines — and your sidekick — for developing websites. Covers tech stack choices, project setup, AI workflows, and conventions.
+
+## Getting started
+
+Paste this into Claude Code inside the new project's empty folder:
+
+```text
+Let's start a new project. Use this as the starting point: https://raw.githubusercontent.com/Altalogy/dev-guidelines/main/kickoff.md (Repo: https://github.com/Altalogy/dev-guidelines)
+```
+
+Claude reads [kickoff.md](kickoff.md), walks the playbook with you, and bakes the result into the new project. See [START-HERE.md](START-HERE.md) for slash-command setup.
 
 ## How this works
 
@@ -17,8 +27,8 @@ Treat the contents as a **starting point, not a rulebook**. AI tooling moves fas
 
 ## Playbook (what Claude walks through)
 
-1. [Pick the stack](playbook/01-pick-stack.md)
-2. [Scaffold the project](playbook/02-scaffold.md) *(stub)*
+1. [Pick the stack](playbook/01-pick-stack.md) — 5-question wizard (type → CMS → tech stack → name → hosting)
+2. [Scaffold the project](playbook/02-scaffold.md)
 3. [Set up AI](playbook/03-setup-ai.md)
 4. [Design handoff](playbook/04-design-handoff.md) *(stub)*
 5. [Build features with AI](playbook/05-build-feature.md) *(stub)*
@@ -27,11 +37,19 @@ Treat the contents as a **starting point, not a rulebook**. AI tooling moves fas
 
 ## Reference
 
-- [stack.md](reference/stack.md) — Web stack comparison for landing pages + blog.
+- [stack.md](reference/stack.md) — Framework comparison (Astro / Next.js / Webflow).
+- [cms.md](reference/cms.md) — CMS comparison + defaults per framework.
+- [tech-stack.md](reference/tech-stack.md) — Toolbox (package manager, styling, lint, etc.) + the Default bundle.
+- [deployment.md](reference/deployment.md) — Vercel default, CloudFront alternative, Cloudflare Pages, Webflow.
+- [scaffold.md](reference/scaffold.md) — Folder conventions per project type.
 
 ## Templates
 
 - [AGENTS.md](templates/AGENTS.md) — Drop-in template for the new project's `AGENTS.md`.
+
+## In progress
+
+- [todo.md](todo.md) — Open items across the wizard, scaffold, references, and playbook stubs.
 
 ## Contributing back
 
